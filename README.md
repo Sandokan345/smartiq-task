@@ -86,6 +86,8 @@ This project was done for spring boot mission of smartiq company.
 - The user can list the cars and see the gallery details of the selected car.    
 
 ## Swagger UI
+/smartiq/swagger-ui.html  
+
 ![img.png](img.png)
 
 ## Entity Relation

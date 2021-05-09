@@ -87,3 +87,6 @@ This project was done for spring boot mission of smartiq company.
 
 ## Swagger UI
 ![img.png](img.png)
+
+## Entity Relation
+![img_1.png](img_1.png)

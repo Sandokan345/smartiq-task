@@ -84,3 +84,6 @@ This project was done for spring boot mission of smartiq company.
 - When adding the gallery, the name cannot be empty and must be unique.
 - The 'carAmount' value in the gallery cannot be given manually, the number changes as the car is added or reduced.
 - The user can list the cars and see the gallery details of the selected car.    
+
+## Swagger UI
+![img.png](img.png)

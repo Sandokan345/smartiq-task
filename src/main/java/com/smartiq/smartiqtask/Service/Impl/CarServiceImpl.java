@@ -13,10 +13,12 @@ import com.smartiq.smartiqtask.Service.ICarService;
 import com.smartiq.smartiqtask.Util.MappingHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class CarServiceImpl implements ICarService {
@@ -57,6 +59,9 @@ public class CarServiceImpl implements ICarService {
         if (!optionalCar.isPresent()){
             throw new BusinessException(BusinessRule.CAR_NOT_FOUND.getDescription());
         }
+        if (!carDTO.getAutoGalleryId().equals(optionalCar.get().getAutoGallery().getId())){
+            throw new BusinessException(BusinessRule.GALLERY_ID_CANNOT_BE_CHANGED.getDescription());
+        }
     }
 
     @Override
@@ -80,7 +85,9 @@ public class CarServiceImpl implements ICarService {
     @Override
     public CarDTO update(CarDTO carDTO) {
         validate(carDTO);
-        validateUpdate(carDTO);
+        if (carDTO.getId() != null){
+            validateUpdate(carDTO);
+        }
         if (carDTO.getId() == null){
             throw new BusinessException(BusinessRule.CAR_NOT_FOUND.getDescription());
         } else {

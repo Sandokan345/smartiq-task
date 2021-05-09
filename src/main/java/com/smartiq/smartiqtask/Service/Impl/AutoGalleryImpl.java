@@ -9,10 +9,12 @@ import com.smartiq.smartiqtask.Service.IAutoGalleryService;
 import com.smartiq.smartiqtask.Util.MappingHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class AutoGalleryImpl implements IAutoGalleryService {
@@ -61,10 +63,11 @@ public class AutoGalleryImpl implements IAutoGalleryService {
 
     @Override
     public AutoGalleryDTO update(AutoGalleryDTO autoGalleryDTO) {
-        validateUpdate(autoGalleryDTO);
+        validate(autoGalleryDTO);
         if (autoGalleryDTO.getId() == null){
             throw new BusinessException(BusinessRule.AUTO_GALLERY_NOT_FOUND.getDescription());
         } else {
+            validateUpdate(autoGalleryDTO);
             // The number of vehicles is assigned to the 'carAmount' variable to be adjusted later so that it does not change.
             Optional<AutoGallery> optionalAutoGallery = autoGalleryDAO.findById(autoGalleryDTO.getId());
             int carAmount = optionalAutoGallery.get().getCarAmount();
